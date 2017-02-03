@@ -10,13 +10,28 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ViewController: UIViewController {
+class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSource{
+    
+    var arrRes = [[String:AnyObject]]() //Array of dictionary
+    @IBOutlet weak var tableView: UITableView!
+
+    
+    @IBOutlet weak var tableview: UITableView!
+    
+    var data = ["one","two","three"]
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
         getBlogJsonData()
         
+        print("fsdfsd" , self.arrRes.count)
         
     
     }
@@ -26,6 +41,29 @@ class ViewController: UIViewController {
         
         
     }
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arrRes.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = self.tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
+        
+         var dict = arrRes[(indexPath as NSIndexPath).row]
+        
+        cell.names.text = dict["title"] as? String
+        
+        
+        return cell
+    }
+    
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        code
+//    }
+    
     
     
     
@@ -42,43 +80,30 @@ class ViewController: UIViewController {
         
         if let resData = swiftyJsonVar["blogs"].arrayObject {
             
-            var arrRes = [[String:AnyObject]]() //Array of dictionary
             
-            arrRes = resData as! [[String:AnyObject]]
+            self.arrRes = resData as! [[String:AnyObject]]
+            self.tableview.reloadData()
             
-            for eachdata in arrRes {
-                
-                let title = eachdata["title"]
-                let description = eachdata["description"]
-                let category = eachdata["categories"]
-                let link = eachdata["link"]
-                
-                print(title)
-                print(description)
-                print(category)
-                print(link)
-
-                
+//            for eachdata in self.arrRes {
+//                
+//                let title = eachdata["title"]
+//                let description = eachdata["description"]
+//                let category = eachdata["categories"]
+//                let link = eachdata["link"]
+//                
+//                print(title)
+//                print(description)
+//                print(category)
+//                print(link)
+//
+//                
+//            
+//            }
             
-            }
-            
-            
-            
-            
-            
-            
-
-        }
-        
-       
-    
-    
-        
     }
+}
 
-    
-    
-    }
+}
 
 
 }

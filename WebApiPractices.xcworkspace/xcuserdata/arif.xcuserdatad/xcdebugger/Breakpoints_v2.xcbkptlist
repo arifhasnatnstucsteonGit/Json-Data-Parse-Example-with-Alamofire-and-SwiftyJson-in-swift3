@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WebApiPractices/ViewController.swift"
-            timestampString = "507665127.677902"
+            timestampString = "507842612.158377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "getBlogJsonData()"
             landmarkType = "7">
          </BreakpointContent>
